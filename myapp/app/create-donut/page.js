@@ -26,37 +26,36 @@ const CreateDonut = () => {
             Access Denied
         </p>
     }
-
     const handleSubmit = async (e) => {
-        e.preventDefault()
-
-        if(!photo || !desc){
-            toast.error("All fields are required")
-            return
+        e.preventDefault();
+    
+        if (!photo || !desc) {
+          toast.error('All fields are required');
+          return;
         }
-
+    
         try {
-          
-          const res = await fetch(`http://localhost:3000/api/donut`, {
+          const res = await fetch('http://localhost:3000/api/donut', {
             headers: {
-               'Content-Type': 'application/json',
-               'Authorization': `Bearer ${session?.user?.accessToken}` 
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${session?.user?.accessToken}`,
             },
             method: 'POST',
-            body: JSON.stringify({desc,imageUrl})
-          })
-
-          if(!res.ok){
-            throw new Error("Error occured")
+            body: JSON.stringify({ desc, imageUrl: photo, userId: session.id}), // Use 'desc' and 'photo' state variables here
+          });
+    
+          if (!res.ok) {
+            throw new Error('Error occurred');
           }
-
-          const blog = await res.json()
-
-          router.push(`/blog/${blog?._id}`)
+    
+          const donut = await res.json();
+    
+          router.push('/');
         } catch (error) {
-            console.log(error)
+          console.log(error);
         }
-    }
+      };
+
 
 
   return (
@@ -64,12 +63,9 @@ const CreateDonut = () => {
         <h2>Create Donut</h2>
         <div>
         <form onSubmit={handleSubmit}>
-                    <textarea placeholder='Description...' onChange={(e) => setDesc(e.target.value)} />
-                    <label htmlFor='image'>
-                        Upload Image <AiOutlineFileImage />
-                    </label>
-                    <input id='image' type="file" style={{ display: 'none' }} onChange={(e) => setPhoto(e.target.files[0])} />
-                  <button>Create</button>
+                    <input placeholder='Description...' onChange={(e) => setDesc(e.target.value)} />
+                    <input  type="text"  onChange={(e) => setPhoto(e.target.value)} />
+                  <button type='submit'>Create</button>
                 </form>
         </div>
         <ToastContainer />
