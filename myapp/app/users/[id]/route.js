@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation'
 
 const UserPage = (ctx) => {
     const [userDetails, setUserDetails] = useState("")
-
+    
     const { data: session } = useSession()
     const router = useRouter()
 
