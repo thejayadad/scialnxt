@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const donutSchema = mongoose.Schema(
+const DonutsSchema = mongoose.Schema(
   {
     userId: {
       type: String,
@@ -30,6 +30,4 @@ const donutSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-const Donut = mongoose.model("Donut", donutSchema);
-
-export default Donut;
+export default mongoose?.models?.Donuts || mongoose.model("Donuts", DonutsSchema)

@@ -1,15 +1,15 @@
 import db from "@/lib/db"
 import bcrypt from 'bcrypt'
-import User from '@/models/User'
+import Users from "@/models/Users"
 
 
 export async function POST(req){
     try {
         await db.connect()
 
-        const {username, email, password: pass} = await req.json()
+        const {firstName, lastName, picturePath, friends, location, occupation, email, password: pass} = await req.json()
 
-        const isExisting = await User.findOne({email})
+        const isExisting = await Users.findOne({email})
 
         if(isExisting){
             throw new Error("User already exists")
@@ -17,7 +17,12 @@ export async function POST(req){
 
         const hashedPassword = await bcrypt.hash(pass, 10)
 
-        const newUser = await User.create({username, email, password: hashedPassword})
+        const newUser = await Users.create({
+            
+            firstName, lastName, email, password: hashedPassword, picturePath,
+            friends,
+            location,
+            occupation})
 
         const {password, ...user} = newUser._doc
 
