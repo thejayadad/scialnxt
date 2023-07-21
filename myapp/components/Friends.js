@@ -14,7 +14,7 @@ const Friends = () => {
   useEffect(() => {
     const fetchFriends = async () => {
       try {
-        const response = await fetch('/api/user/friends', {
+        const response = await fetch(`/api/user/${id}/friends`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${session?.accessToken}`,

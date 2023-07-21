@@ -3,17 +3,16 @@ import { verifyJwtToken } from "@/lib/jwt";
 import User from "@/models/User";
 
 
-export async function GET(req, ctx) {
+export async function GET(req, res) {
     await db.connect()
 
-    const id = ctx.params.id
 
     try {
-        const user = await User.findById(id)
+        const user = await User.findById(req.params.id)
         const {password, ...others} = user._doc;
-        return new Response(JSON.stringify(others), { status: 200 })
+        return res.status(200).json(others);
     } catch (error) {
-        return new Response(JSON.stringify(null), { status: 500 })
+        return res.status(500).json(error.message);
     }
 }
 
@@ -74,3 +73,4 @@ export async function DELETE(req, ctx) {
         return new Response(JSON.stringify(null), { status: 500 }) 
     }
 }
+

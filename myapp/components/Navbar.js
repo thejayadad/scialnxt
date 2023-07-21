@@ -21,8 +21,8 @@ const Navbar = () => {
                        ? (
                         <>
                         <Link href={'/create-donut'}>Create</Link>
+                        <span>{session.user.email}</span>
                         <button onClick={() => {signOut()}}>Logout</button>
-
                         </>
 
 
