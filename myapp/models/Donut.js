@@ -1,24 +1,35 @@
 import mongoose from "mongoose";
 
-const DonutSchema = new mongoose.Schema({
+const donutSchema = mongoose.Schema(
+  {
     userId: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
-    desc: {
-        type: String,
-        required: true,
-        min: 10,
-        max: 100,
+    firstName: {
+      type: String,
+      required: true,
     },
-    imageUrl: {
-        type: String,
-        required: true,
+    lastName: {
+      type: String,
+      required: true,
     },
+    location: String,
+    description: String,
+    picturePath: String,
+    userPicturePath: String,
     likes: {
-        type: Array,
-        default: []
-    }
-}, { timestamps: true });
+      type: Map,
+      of: Boolean,
+    },
+    comments: {
+      type: Array,
+      default: [],
+    },
+  },
+  { timestamps: true }
+);
 
-export default mongoose?.models?.Donut || mongoose.model("Donut", DonutSchema)
+const Donut = mongoose.model("Donut", donutSchema);
+
+export default Donut;

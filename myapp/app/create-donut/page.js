@@ -11,7 +11,7 @@ import { useSession } from 'next-auth/react'
 const CreateDonut = () => {
     
     const [desc, setDesc] = useState('')
-    const [photo, setPhoto] = useState('')
+    const [imageUrl, setimageUrl] = useState('')
 
     const { data: session, status } = useSession()
     const router = useRouter()
@@ -29,7 +29,7 @@ const CreateDonut = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        if (!photo || !desc) {
+        if (!imageUrl || !desc) {
           toast.error('All fields are required');
           return;
         }
@@ -41,7 +41,7 @@ const CreateDonut = () => {
               Authorization: `Bearer ${session?.user?.accessToken}`,
             },
             method: 'POST',
-            body: JSON.stringify({ desc, imageUrl: photo, userId: session.id}), // Use 'desc' and 'photo' state variables here
+            body: JSON.stringify({ desc, imageUrl, userId: session?.user?._id}), // Use 'desc' and 'photo' state variables here
           });
     
           if (!res.ok) {
@@ -64,7 +64,7 @@ const CreateDonut = () => {
         <div>
         <form onSubmit={handleSubmit}>
                     <input placeholder='Description...' onChange={(e) => setDesc(e.target.value)} />
-                    <input  type="text"  onChange={(e) => setPhoto(e.target.value)} />
+                    <input  type="text"  onChange={(e) => setimageUrl(e.target.value)} />
                   <button type='submit'>Create</button>
                 </form>
         </div>
