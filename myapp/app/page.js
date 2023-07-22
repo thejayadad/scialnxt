@@ -1,9 +1,13 @@
-import Image from 'next/image'
+'use client'
+
 
 export default function Home() {
+
+
   return (
-   <main>
-    <h2>Home</h2>
-   </main>
-  )
+    <main>
+        <h2>Home Route</h2>
+
+    </main>
+  );
 }

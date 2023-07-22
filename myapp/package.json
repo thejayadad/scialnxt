@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.0.2",
     "autoprefixer": "10.4.14",
+    "data.js": "^0.12.11",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.11",
     "next": "13.4.11",

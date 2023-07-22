@@ -1,4 +1,8 @@
 import mongoose from 'mongoose';
+import Users from '@/models/Users';
+import Donuts from '@/models/Donuts';
+import {users, donuts} from "../lib/data"
+
 
 const connection = {};
 
@@ -11,6 +15,10 @@ async function connect() {
     if (mongoose.connections.length > 0) {
         connection.isConnected = mongoose.connections[0].readyState;
         if (connection.isConnected === 1) {
+            // Users.insertMany(users)
+            // console.log("db going")
+            // Donuts.insertMany(donuts)
+ 
             return;
         }
         await mongoose.disconnect();
@@ -27,5 +35,8 @@ async function disconnect() {
         }
     }
 }
+
+
+  
 const db = { connect, disconnect };
 export default db;
